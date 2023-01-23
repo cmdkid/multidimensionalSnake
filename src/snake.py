@@ -95,6 +95,11 @@ class Snake:  # (metaclass=Singleton):
     def get_pos(self):
         return self._pos
 
+    def get_direction(self):
+        if self._mov_direction == 0:
+            return 10 * self._mov_k
+        return self._mov_direction * 10 * self._mov_k
+
     def set_direction(self, coord_id: int, polarity: int):
         if coord_id > self._dimension:
             raise ValueError

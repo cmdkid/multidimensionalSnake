@@ -1,3 +1,4 @@
+from time import sleep
 import random
 
 from src.food import Food
@@ -24,10 +25,11 @@ class Field(metaclass=Singleton):
     _game_speed = 0
     _snake_score = 0
 
-    def __init(self, game_speed_ms: int = conf('settings', 'speed')):
-        self._game_speed = game_speed_ms
+    def __init(self):
+        pass
 
-    def init(self, field_dimensions: list):
+    def init(self, field_dimensions: list, game_speed_sec: int = conf('settings', 'speed')):
+        self._game_speed = game_speed_sec
         self._field_dimensions = field_dimensions
 
     def is_death(self):
@@ -48,6 +50,15 @@ class Field(metaclass=Singleton):
         for i in range(len(self._field_dimensions)):
             center.append(round(self._field_dimensions[i]/2))
         return center
+
+    def get_food_pos(self):
+        return self._food.get_pos()
+
+    def get_snake_head_pos(self):
+        return self._snake.get_pos()
+
+    def get_snake_direction(self):
+        return self._snake.get_direction()
 
     def add_snake(self, pos: list = None, length: int = conf('snake', 'length')):
         if pos is None:
@@ -138,8 +149,12 @@ class Field(metaclass=Singleton):
         # tic snake
         self._snake.tic()
         print(self._snake.get_pos())
+        # ToDo: subtract time of validating, replace with async to be controllable while waiting for next move
+        # slow down a game
+        sleep(self._game_speed)
 
 
 # create singleton object
 field = Field()
 field.init(conf('field'))
+print(f'Field dimension: {conf("field")}')

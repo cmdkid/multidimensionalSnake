@@ -12,11 +12,11 @@ def conf(*attr):
 
 
 conf_data = {
-    'field': [25, 80],  # field dimensions
+    'field': [100, 100, 100, 100],  # field dimensions
     'snake': {
-        'length': 3
+        'length': 3  # snake length at the beginning
     },
     'settings': {
-        'speed': 1  # game speed in ms
+        'speed': 0.1  # game speed in sec
     }
 }
