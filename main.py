@@ -12,7 +12,7 @@ if __name__ == '__main__':
         field.tic()
 
         # bot control
-        bot_blind_snake()
+        # bot_blind_snake()
         # bot_chaotic_snake()
 
     print(f'Death! Snake fat count={field.get_score()}.')
